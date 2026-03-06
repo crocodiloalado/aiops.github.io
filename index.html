@@ -7,7 +7,438 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+/* CSS Reset and Variables - Inspired by Templo.pro */
+:root {
+  --color-red: #e31e24;
+  --color-navy: #0a192f;
+  --color-forest: #1b4332;
+  --color-beige: #f4f1ea;
+  --color-white: #ffffff;
+  --color-black: #1a1a1a;
+  --color-gray-light: #f9f9f9;
+  --color-gray-border: #e0e0e0;
+  --color-lavender: #e0bbe4;
+  --color-orange: #ff8a5b;
+
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
+
+  --radius-pill: 50px;
+  --radius-card: 20px;
+  --shadow-card: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-black);
+  line-height: 1.6;
+  background-color: var(--color-white);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+.hero-title,
+.section-title {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+h1 i,
+h2 i,
+h3 i {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.section {
+  padding: 100px 0;
+}
+
+.section-title {
+  font-size: 3.5rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  color: var(--color-navy);
+}
+
+.text-light {
+  color: var(--color-beige);
+}
+
+/* HERO SECTION */
+.hero {
+  background-color: var(--color-red);
+  color: var(--color-white);
+  padding: 160px 0;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: 5.5rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* DIAGNOSIS SECTION */
+.diagnosis {
+  background-color: var(--color-beige);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background-color: var(--color-white);
+  padding: 40px;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-number {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--color-red);
+  line-height: 1;
+  margin-bottom: 1rem;
+  opacity: 0.2;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-weight: 800;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-navy);
+  font-family: var(--font-body);
+  font-weight: 600;
+}
+
+.card p {
+  color: #555;
+  font-size: 1.05rem;
+}
+
+/* PRIORITIES */
+.priorities {
+  background-color: var(--color-navy);
+}
+
+.priority-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.priority-item {
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.priority-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.priority-tag {
+  background-color: var(--color-red);
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  margin-right: 30px;
+}
+
+.priority-content h3 {
+  color: var(--color-white);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-body);
+}
+
+.priority-content p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.1rem;
+}
+
+/* QUICK WINS */
+.quick-wins {
+  background-color: var(--color-white);
+}
+
+.quick-win-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.quick-win-item {
+  background-color: var(--color-gray-light);
+  border-left: 6px solid var(--color-orange);
+  border-radius: var(--radius-card);
+  padding: 30px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s ease;
+}
+
+.quick-win-item:hover {
+  transform: translateX(10px);
+}
+
+.quick-win-header {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--color-navy);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.quick-win-text {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+/* 4 AXES */
+.axes {
+  background-color: var(--color-gray-light);
+}
+
+.axis-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.axis-card {
+  padding: 50px;
+  border-radius: var(--radius-card);
+  color: var(--color-white);
+  display: flex;
+  flex-direction: column;
+}
+
+.axis-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.axis-number {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.axis-priority {
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.axis-red {
+  background-color: var(--color-red);
+}
+.axis-navy {
+  background-color: var(--color-navy);
+}
+.axis-green {
+  background-color: var(--color-forest);
+}
+.axis-beige {
+  background-color: var(--color-beige);
+  color: var(--color-navy);
+}
+
+.axis-beige .axis-priority {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.axis-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-body);
+}
+
+.axis-list {
+  list-style: none;
+  flex-grow: 1;
+}
+
+.axis-list li {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+  position: relative;
+  opacity: 0.9;
+}
+
+.axis-list li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+/* TIMELINE - CICLOS */
+.sequence {
+  background-color: var(--color-forest);
+  padding-bottom: 120px;
+}
+
+.sequence-intro {
+  text-align: center; 
+  color: var(--color-beige); 
+  margin-bottom: 4rem; 
+  font-size: 1.25rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.9;
+}
+
+.timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  padding-left: 40px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -49px;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--color-lavender);
+  border: 4px solid var(--color-forest);
+}
+
+.time-marker {
+  font-family: var(--font-heading);
+  color: var(--color-lavender);
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+
+.time-content {
+  color: var(--color-beige);
+  font-size: 1.15rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 16px;
+}
+
+.time-content h3 {
+  color: var(--color-white);
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  font-family: var(--font-heading);
+}
+
+.time-content strong {
+  color: var(--color-orange);
+  font-weight: 500;
+}
+
+/* FOOTER */
+.footer {
+  background-color: var(--color-black);
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .hero-title {
+    font-size: 4rem;
+  }
+  .section-title {
+    font-size: 3rem;
+  }
+  .axis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .priority-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  .hero-title {
+    font-size: 3rem;
+  }
+}
+    </style>
 </head>
 <body>
 
@@ -15,7 +446,7 @@
     <header class="hero">
         <div class="container">
             <h1 class="hero-title">Plano <i>AIOps</i><br>+ Educação</h1>
-            <p class="hero-subtitle">PROPOSTA DE AÇÕES.</p>
+            <p class="hero-subtitle">REESTRUTURAÇÃO OPERACIONAL E TECNOLÓGICA DAS ENTREGAS EDUCACIONAIS.</p>
         </div>
     </header>
 
@@ -33,38 +464,32 @@
 
                 <div class="card">
                     <div class="card-number">2</div>
-                    <h3 class="card-title">Desalinhamento Comercial x Educação</h3>
-                    <p>Sem clareza sobre o produto padrão, o Comercial fecha contratos com promessas de personalização que, muitas vezes, se mostra inviável operacionalmente.</p>
+                    <h3 class="card-title">Desalinhamento de vendas e fluxo de informação quebrado</h3>
+                    <p>O Comercial fecha contratos com promessas de personalização inviáveis para a operação, por vezes geradas por um agente de propostas sem restrições claras. Somado a isso, a Educação recebe briefings genéricos e não obtém as informações necessárias (ferramentas e cenários do cliente) para produzir corretamente ementas e planos de aula, sendo obrigada a trabalhar "no escuro" e sem validação técnica real.</p>
                 </div>
 
                 <div class="card">
                     <div class="card-number">3</div>
-                    <h3 class="card-title">Fluxo de informação quebrado</h3>
-                    <p>Os briefings que chegam ao time de Objetos são considerados genéricos, incompletos ou construídos sem validação com o cliente. A Educação começa a produzir "no escuro".</p>
+                    <h3 class="card-title">Ausência de gestão de qualidade técnica</h3>
+                    <p>Sem um papel dedicado à qualidade técnica (curricular e tecnológica), a equipe produz sem um norte. Essa qualidade precisa se manifestar primeiramente na criação e aderência a novos processos operacionais. Além disso, o papel dos monitores está subutilizado.</p>
                 </div>
 
                 <div class="card">
                     <div class="card-number">4</div>
-                    <h3 class="card-title">Ausência de gestão de qualidade técnica</h3>
-                    <p>Sem um papel dedicado à qualidade técnica dos produtos educacionais, a equipe produz sem um norte de referência específico. O resultado não está no nível esperado.</p>
+                    <h3 class="card-title">Automações existentes fora de uso</h3>
+                    <p>Apesar de termos automações prontas, elas não estão integradas ao uso diário da Educação. A automação sofre com falta de treinamento do time e com a operação travando em bancos de dados pesados e inviáveis (devido ao tamanho dos HTMLs na automação de propostas).</p>
                 </div>
 
                 <div class="card">
                     <div class="card-number">5</div>
-                    <h3 class="card-title">Automação existente fora de uso</h3>
-                    <p>Existe automação construída para geração de ementas, mas, segundo o time de Educação, ela não cobre todos os formatos e não processa o contexto necessário.</p>
+                    <h3 class="card-title">Objetos de aprendizagem sem direção</h3>
+                    <p>Playlists, playbooks e materiais de sala invertida avançam sem clareza de formato, volume ou prioridade. O esforço é muito alto e o acesso/engajamento dos clientes costuma ser baixíssimo, demandando uma reflexão profunda sobre o real valor dessas entregas.</p>
                 </div>
 
                 <div class="card">
                     <div class="card-number">6</div>
-                    <h3 class="card-title">Objetos de aprendizagem sem direção</h3>
-                    <p>Playlists, playbooks e materiais de sala invertida avançam sem clareza de formato, volume ou prioridade. Escopos mudam sem comunicação formal e o esforço vira retrabalho.</p>
-                </div>
-
-                <div class="card">
-                    <div class="card-number">7</div>
                     <h3 class="card-title">Clima organizacional comprometido</h3>
-                    <p>O acúmulo de problemas estruturais criaram insegurança psicológica no time. A equipe sente que é responsabilizada por falhas com origem em etapas anteriores. A equipe está engajada, mas o cenário é preocupante.</p>
+                    <p>As mudanças de liderança, acúmulo de problemas sem resolução e recentes demissões criaram um ambiente de insegurança. Apesar disso, é consenso que a equipe de Educação está engajada e tem vontade de melhorar o cenário operacional e focar na criatividade.</p>
                 </div>
 
             </div>
@@ -81,7 +506,7 @@
                     <div class="priority-tag">Prioridade 1</div>
                     <div class="priority-content">
                         <h3>Definição curricular base</h3>
-                        <p>Conteúdo padrão dos Módulos 1, 2 e 3, independente de cliente ou vertical</p>
+                        <p>Conteúdo padrão dos Módulos 1 ao 4, independente de cliente ou vertical</p>
                     </div>
                 </div>
 
@@ -97,7 +522,7 @@
                     <div class="priority-tag">Prioridade 3</div>
                     <div class="priority-content">
                         <h3>Regularização do briefing</h3>
-                        <p>Estruturar o fluxo de passagem de bastão do Comercial/Atendimento para a Educação</p>
+                        <p>Estruturar o fluxo de passagem Comercial/Educação com roteiros diretos e que justifiquem o valor das informações solicitadas</p>
                     </div>
                 </div>
 
@@ -105,7 +530,7 @@
                     <div class="priority-tag">Prioridade 4</div>
                     <div class="priority-content">
                         <h3>Automação baseada nos padrões</h3>
-                        <p>Refatorar ou substituir automações só após os padrões estarem definidos</p>
+                        <p>Refatorar e adaptar as automações existentes apenas para rodarem sobre os novos processos</p>
                     </div>
                 </div>
 
@@ -113,7 +538,7 @@
                     <div class="priority-tag">Prioridade 5</div>
                     <div class="priority-content">
                         <h3>Revisão dos objetos de aprendizagem</h3>
-                        <p>Com currículo base definido, revisar playlists e playbooks sem risco de retrabalho</p>
+                        <p>Repensar as ofertas, playbooks e playlists (após estruturação dos módulos base)</p>
                     </div>
                 </div>
 
@@ -121,13 +546,33 @@
         </div>
     </section>
 
-    <!-- Papel e Objetivo Section -->
-    <section class="section role">
+    <!-- Quick Wins Section -->
+    <section class="section quick-wins">
         <div class="container">
-            <div class="role-box">
-                <h2 class="role-title">Papel e <i>Objetivo</i></h2>
-                <p class="role-text">Atuar como <strong>liderança técnica de qualidade</strong> na área de Operações/Educação, reportando à Tecnologia. O foco é garantir a qualidade das entregas, estruturar os processos em aberto e habilitar automações sobre uma base sólida.</p>
-                <p class="role-text">A atuação não é permanente: o objetivo é <em>estruturar, documentar e transferir</em> — deixando a área operando com mais autonomia e consistência.</p>
+            <h2 class="section-title">Ações Tangíveis e <i>"Quick Wins"</i></h2>
+            <p style="text-align: center; font-size: 1.25rem; color: #555; margin-bottom: 3rem; max-width: 800px; margin-left: auto; margin-right: auto;">Para entrega imediata de valor e alívio do sistema em AIOps + Educação.</p>
+            
+            <div class="quick-win-list">
+                <div class="quick-win-item">
+                    <div class="quick-win-header">Restrição no Agente Comercial</div>
+                    <div class="quick-win-text">Alterar system prompt do agente criador de propostas para limitar ofertas de vendas da Educação e do Comercial apenas à esfera de "IA Generativa" e LLMs.</div>
+                </div>
+                
+                <div class="quick-win-item">
+                    <div class="quick-win-header">Automação do Chatbot Assessment</div>
+                    <div class="quick-win-text">Configurar a saída da automação para gerar automaticamente um documento no Google Drive (como primeiro passo antes de uma integração completa e complexa no Notion).</div>
+                </div>
+
+
+                <div class="quick-win-item">
+                    <div class="quick-win-header">Auditoria no Classplay</div>
+                    <div class="quick-win-text">Fazer o inventário dos agentes em uso (Comercial/Atendimento) e estabelecer o <em>Gemini 3.0 Flash</em> (ou <em>DeepSeek 3.2</em>) como LLM padrão da plataforma.</div>
+                </div>
+
+                <div class="quick-win-item">
+                    <div class="quick-win-header">Adaptação Pós-aula</div>
+                    <div class="quick-win-text">Ajustar os gatilhos da automação existente para começar a enviar resumos e materiais pós-aula automatizados também para os participantes de Grupos de Estudos.</div>
+                </div>
             </div>
         </div>
     </section>
@@ -146,10 +591,10 @@
                     </div>
                     <h3 class="axis-title">Padrão Curricular</h3>
                     <ul class="axis-list">
-                        <li>Definir o "padrão ouro" de ementa (template validado)</li>
-                        <li>Definir o "padrão ouro" de plano de aula (dinâmicas e tópicos)</li>
-                        <li>Estabelecer os currículos base dos Módulos 1, 2, 3 e 4</li>
-                        <li>Documentar tudo — insumo para o time e base para automações</li>
+                        <li>Definir o "padrão ouro" de ementa (template validado pela liderança).</li>
+                        <li>Definir o "padrão ouro" de plano de aula (foco em tópicos e dinâmicas unificadas).</li>
+                        <li>Estabelecer os currículos base (especialmente Módulo 1, 2, 3 e 4).</li>
+                        <li>Documentar os acertos — servindo de insumo para atritos futuros e base sólida para automações.</li>
                     </ul>
                 </div>
 
@@ -161,10 +606,9 @@
                     </div>
                     <h3 class="axis-title">Fluxo de Informação</h3>
                     <ul class="axis-list">
-                        <li>Mapear o fluxo atual: Comercial → GP → Educação</li>
-                        <li>Criar checklist mínimo de briefing para início de produção</li>
-                        <li>Alinhar com o Comercial sobre o produto real da Educação</li>
-                        <li>Integrar o briefing estruturado baseados no Notion</li>
+                        <li>Criar roteiro de coleta estruturado de briefing, aprofundando técnica e o "por que" de cada informação.</li>
+                        <li>Mapear e formalizar o fluxo: Comercial → GP → Educação (alinhando os limites).</li>
+                        <li>Integrar os retornos do Assessment e as infos de Kickoff no Notion como central.</li>
                     </ul>
                 </div>
 
@@ -173,11 +617,10 @@
                     <div class="axis-header">
                         <span class="axis-number">Eixo 3</span>
                     </div>
-                    <h3 class="axis-title">Objetos de Aprendizagem</h3>
+                    <h3 class="axis-title">Objetos & Papéis</h3>
                     <ul class="axis-list">
-                        <li>Definir formato ideal de playlist (volume, estrutura, curadoria)</li>
-                        <li>Revisar playbooks e alinhar com o currículo base</li>
-                        <li>Criar templates padronizados para todos os objetos</li>
+                        <li>Repensar o valor gerado pelos playbooks e playlists refletindo sobre dados de acesso.</li>
+                        <li>Reformular o papel dos Monitores ativamente na organização técnica (gestão de gravações, contexto no Notion, pós-aula).</li>
                     </ul>
                 </div>
 
@@ -186,26 +629,11 @@
                     <div class="axis-header">
                         <span class="axis-number">Eixo 4</span>
                     </div>
-                    <h3 class="axis-title">Automações</h3>
+                    <h3 class="axis-title">Automação & IA</h3>
                     <ul class="axis-list">
-                        <li>Revisar automações existentes e entender bloqueios de uso</li>
-                        <li>Usar documentação dos novos padrões para refatoração</li>
-                        <li>Mapear novos pontos do processo para agregar valor com IA</li>
+                        <li>Revisitar automações de <em>Class Plan</em> e propostas, removendo fricção baseada nos novos fluxos.</li>
+                        <li>Promover workshops técnicos imediatos com os analistas (Erick, Rapha, Matheus) para ensiná-los as melhores práticas no Notion e na criação de base.</li>
                     </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Curtissimo Prazo Section -->
-    <section class="section action">
-        <div class="container action-container">
-            <div class="action-content">
-                <span class="tag-pill">Ação de Curtíssimo Prazo</span>
-                <h2 class="action-title">Workshop com o time de Educação</h2>
-                <p>Antes de avançar nos eixos, realizar um workshop prático com Erick, Matheus e Rapha. Objetivo: apresentar ferramentas e métodos que podem ajudar a organizar melhor o contexto por projeto, usando a IA do Notion ou ferramentas como o Antigravity.</p>
-                <div class="action-result">
-                    <strong>Resultado Esperado:</strong> Melhorar a experiência de trabalho e qualidade de entrega do time no curtíssimo prazo, enquanto os padrões são construídos.
                 </div>
             </div>
         </div>
@@ -214,24 +642,32 @@
     <!-- Sequência de Execução Section -->
     <section class="section sequence">
         <div class="container">
-            <h2 class="section-title text-light">Sequência de <i>Execução</i></h2>
+            <h2 class="section-title text-light">Sequência de Execução em <i>Ciclos</i></h2>
+            <p class="sequence-intro">O trabalho passará a ser dividido em escopos de 45 dias — facilitando o cumprimento, limitando as expectativas e demonstrando progresso contínuo à liderança (podendo ser acompanhado com entregas menores quinzenais).</p>
             
             <div class="timeline">
                 <div class="timeline-item">
-                    <div class="time-marker">Curto prazo</div>
-                    <div class="time-content">Eixo 1 — definir e aprovar padrão ouro</div>
+                    <div class="time-marker">Dias 1 a 45</div>
+                    <div class="time-content">
+                        <h3>Ciclo 1: Estancar a Sangria (Arrumar a Casa)</h3>
+                        <p><strong>Implementação de base:</strong> Definição/decisão dos conteúdos modulares de currículo (Módulos 1 ao 4) e estabelecimento de templates de plano de aula (padrão ouro). Organização inicial dos rituais, aplicação do roteiro formal de briefing (reduzindo a entrega defasada) e dos <em>Quick Wins</em> técnicos estipulados acima.</p>
+                    </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="time-marker">Curto/médio</div>
-                    <div class="time-content">Eixo 2 — mapear e estruturar fluxo de briefing</div>
+                    <div class="time-marker">Dias 45 a 90</div>
+                    <div class="time-content">
+                        <h3>Ciclo 2: Adoção e Adaptação</h3>
+                        <p><strong>Estrutura mais eficiente:</strong> Não buscaremos criar "novas grandes rodas". Pela fundação pronta, incorporaremos e adaptaremos as automações que o Templo/Klaus já criaram aos novos processos (que passaram no Ciclo 1). Foco total em treinamento e em vencer as resistências da equipe à tecnologia.</p>
+                    </div>
                 </div>
+                
                 <div class="timeline-item">
-                    <div class="time-marker">Médio prazo</div>
-                    <div class="time-content">Eixo 3 — revisar objetos com base no currículo definido</div>
-                </div>
-                <div class="timeline-item">
-                    <div class="time-marker">Médio prazo</div>
-                    <div class="time-content">Eixo 4 — implementar automações sobre base sólida</div>
+                    <div class="time-marker">Dias 90 a 135</div>
+                    <div class="time-content">
+                        <h3>Ciclo 3: Escalabilidade Automática e Novas Ofertas</h3>
+                        <p><strong>Automação ponta-a-ponta e Novas Ofertas:</strong> Com a casa em pleno funcionamento fluído e organizado, pensar automações que liguem etapas completas (ex: Assessment gera documento -> preenche o Notion -> aciona agente). A ideia é livrar horas produtivas de esforço braçal da equipe, escalando e permitindo ofertas complexas por parte do Templo (cursos de vibe coding, n8n, etc.).</p>
+                    </div>
                 </div>
             </div>
         </div>
